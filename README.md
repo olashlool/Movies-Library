@@ -6,15 +6,13 @@
 build server
 ## Getting Started
 The Basic of step:
- - Create server.js file
- - npm init -y
- - npm install express
- - const express = require("express");
- - const app = express();
- - app.listen(3000, () => {
-    console.log("ANYTHING");
-    });
+ - run the server by calling 'node server.js'
+ - in your browser open "http://localhost:3000/" to see the home page that loads th data.json file
+ - open "http://localhost:3000/favorite" to see the favorite page
+
+
 
 
 ## Project Features
-more than movie and some detail.
+ - Sends json object with movie info
+ - Shows the favorite page
