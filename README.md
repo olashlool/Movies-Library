@@ -6,7 +6,7 @@
 build server
 ## Getting Started
 The Basic of step:
- - After clone repo you should install npm through the command npm install
+ - After clone repo you should install all packages npm through the command npm install
  - run the server by calling 'node server.js'
  - in your browser open "http://localhost:15222/" to see the home page that loads th data.json file
  - open "http://localhost:15222/favorite" to see the favorite page
