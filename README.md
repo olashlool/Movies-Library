@@ -1,4 +1,4 @@
-# Movies-Library - Project Version 1
+# Movies-Library - Project Version 2.0
 **Author Name**: Ola M AL-Shlool
 ## WRRC
 ![image](/assest/WRRC.png)
@@ -15,5 +15,7 @@ The Basic of step:
 
 
 ## Project Features
- - Sends json object with movie info
- - Shows the favorite page
+ - Movies Info
+ - Search Movies
+ - Popular Movies
+ - upcoming Movies
