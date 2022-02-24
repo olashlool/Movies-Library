@@ -18,7 +18,7 @@ function Movies(id,title,release_date, poster_path, overview,){
     this.poster_path = poster_path;
     this.overview = overview;
 };
-
+//
 app.use(express.json());
 app.get('/', movieHandler);
 app.get('/favorite', favoriteHandler);
@@ -28,8 +28,12 @@ app.get("/popular", popularHandler);
 app.get("/upcoming", upcomingHandler);
 app.get("/getMovies", getMoviesHandler);
 app.post("/addMovie", addMovieHandler);
+app.put('/UPDATE/:id', updateMovieHandler);
+app.delete('/DELETE/:id', deleteMovieHandler);
+app.get('/getMovie/:id', getMovieHandler);
 app.use("*", notFoundHandler);
 app.use(errorHandler);
+
 
 function errorHandler (err, req, res, next) {
     let error ={
@@ -122,6 +126,38 @@ function getMoviesHandler(req, res) {
         return res.status(200).json(result.rows);
         }).catch((error) => {
         errorHandler(error, req, res);
+    });
+}
+function updateMovieHandler(req, res) {
+    const id = req.params.id;
+    const movie = req.body;
+    const sql = `UPDATE addmovie SET title=$1, release_date=$2,poster_path=$3, overview=$4, comment=$5 WHERE id=$6 RETURNING *`;
+    let values = [movie.title, movie.release_date, movie.poster_path, movie.overview, movie.comment, id];
+    client.query(sql, values).then(data => {
+        res.status(200).json(data.rows);
+    }).catch(error => {
+        errorHandler(error, req, res)
+    });
+}
+function deleteMovieHandler(req, res) {
+    const id = req.params.id;
+    const sql = `DELETE FROM addmovie WHERE id=$1;`;
+    const values = [id];
+    client.query(sql, values).then(() => {
+        return res.status(204).json({});
+    })
+    .catch((error) => {
+        errorHandler(error, req, res);
+    });
+}
+function getMovieHandler(req, res) {
+    const id = req.params.id;
+    let sql = `SELECT * FROM addmovie WHERE id=$1;`;
+    const values = [id];
+    client.query(sql,values).then(data => {
+        res.status(200).json(data.rows);
+    }).catch(error => {
+        errorHandler(error, req, res)
     });
 }
 function notFoundHandler(req, res){
