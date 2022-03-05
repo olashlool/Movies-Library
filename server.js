@@ -5,7 +5,11 @@ const movies = require("./MovieData/data.json");
 require("dotenv").config();
 const axios = require("axios");
 const pg = require("pg");
+const cors =require('cors')
 const app = express();
+
+app.use(cors());
+
 const APIKEY = process.env.APIKEY;
 const PORT = process.env.PORT;
 const DATABASE_URL = process.env.DATABASE_URL;
